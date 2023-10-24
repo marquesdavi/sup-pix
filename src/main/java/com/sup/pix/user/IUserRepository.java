@@ -1,8 +1,10 @@
-package com.sup.controller;
+package com.sup.pix.user;
+
+import com.sup.pix.models.UserModel;
 
 import java.util.UUID;
+
 import org.springframework.data.jpa.repository.JpaRepository;
-import com.sup.dto.UserModel;
 
 public interface IUserRepository extends JpaRepository<UserModel, UUID>{
     UserModel findByUsername(String username);
