@@ -1,4 +1,4 @@
-package com.sup.dto;
+package com.sup.pix.payment;
 import lombok.Data;
 
 @Data

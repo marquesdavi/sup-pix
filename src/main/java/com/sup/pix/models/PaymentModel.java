@@ -1,4 +1,4 @@
-package com.sup.dto;
+package com.sup.pix.models;
 
 import java.math.BigDecimal;
 import lombok.Data;
