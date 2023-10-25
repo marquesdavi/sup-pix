@@ -1,10 +1,14 @@
 package com.sup.pix.controllers;
 
+import com.sup.pix.domain.financial.instition.FinancialInstitution;
 import com.sup.pix.domain.user.AuthenticationDTO;
 import com.sup.pix.domain.user.LoginResponseDTO;
 import com.sup.pix.domain.user.RegisterDTO;
 import com.sup.pix.domain.user.User;
+import com.sup.pix.domain.financial.instition.RegisterInstitutionDTO;
+
 import com.sup.pix.infra.security.TokenService;
+import com.sup.pix.repositories.FinancialInstitutionRepository;
 import com.sup.pix.repositories.UserRepository;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,11 +27,13 @@ public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
     @Autowired
-    private UserRepository repository;
+    private UserRepository userRepository;
+    @Autowired
+    private FinancialInstitutionRepository financialInstitutionRepository;
     @Autowired
     private TokenService tokenService;
 
-    @PostMapping("/login")
+    @PostMapping("/login/user")
     public ResponseEntity login(@RequestBody @Valid AuthenticationDTO data){
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
@@ -37,9 +43,9 @@ public class AuthenticationController {
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
 
-    @PostMapping("/register")
+    @PostMapping("/register/user")
     public ResponseEntity register(@RequestBody @Valid RegisterDTO data){
-        if(this.repository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
+        if(this.userRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
 
         String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
         User newUser = new User(
@@ -51,7 +57,25 @@ public class AuthenticationController {
                 data.role()
         );
 
-        this.repository.save(newUser);
+        this.userRepository.save(newUser);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/register/institution")
+    public ResponseEntity registerInstitution(@RequestBody @Valid RegisterInstitutionDTO data){
+        if(this.financialInstitutionRepository.findByEmail(data.email()) != null) return ResponseEntity.badRequest().build();
+
+        String encryptedPassword = new BCryptPasswordEncoder().encode(data.password());
+        FinancialInstitution newUser = new FinancialInstitution(
+                data.email(),
+                encryptedPassword,
+                data.corporateReason(),
+                data.document(),
+                data.role()
+        );
+
+        this.financialInstitutionRepository.save(newUser);
 
         return ResponseEntity.ok().build();
     }
