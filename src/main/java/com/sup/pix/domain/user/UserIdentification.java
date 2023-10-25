@@ -1,21 +1,28 @@
-package com.sup.pix.models;
+package com.sup.pix.domain.user;
 
 import jakarta.persistence.Embeddable;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 
 @Embeddable
  class UserIdentification {
-    private String type;
+    public enum DocumentType {
+        CPF, CNPJ;
+    }
+
+    @Enumerated(EnumType.ORDINAL)
+    private DocumentType type;
 
     private String number;
 
     public UserIdentification() {
     }
 
-    public String getType() {
+    public DocumentType getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(DocumentType type) {
         this.type = type;
     }
 

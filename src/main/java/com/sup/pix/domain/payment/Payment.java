@@ -1,16 +1,19 @@
-package com.sup.pix.models;
+package com.sup.pix.domain.payment;
 
 import java.math.BigDecimal;
+
+import com.sup.pix.domain.user.User;
+
 import lombok.Data;
 
 @Data
-public class PaymentModel {
+public class Payment {
     private BigDecimal transactionAmount;
 
     private String productDescription;
 
-    private UserModel payer;
+    private User payer;
 
-    public PaymentModel() {
+    public Payment() {
     }
 }
