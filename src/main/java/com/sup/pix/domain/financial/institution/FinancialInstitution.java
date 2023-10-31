@@ -1,4 +1,4 @@
-package com.sup.pix.domain.financial.instition;
+package com.sup.pix.domain.financial.institution;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
@@ -34,7 +34,7 @@ public class FinancialInstitution implements UserDetails {
     private String corporateReason;
     @Column(name = "password")
     private String password;
-    private UserRole role;
+    private InstitutionRole role;
 
     @Column(name = "document")
     private String document;
@@ -48,7 +48,7 @@ public class FinancialInstitution implements UserDetails {
             String password,
             String corporateReason,
             String document,
-            UserRole role
+            InstitutionRole role
     ){
         this.email = email;
         this.corporateReason = corporateReason;
@@ -59,12 +59,12 @@ public class FinancialInstitution implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == UserRole.ADMIN) {
+        if (this.role == InstitutionRole.ADMIN) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_USER")
+                    new SimpleGrantedAuthority("ROLE_INSTITUTION")
             );
-        } else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
+        } else return List.of(new SimpleGrantedAuthority("ROLE_INSTITUTION"));
     }
 
     @Override

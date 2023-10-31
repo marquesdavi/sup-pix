@@ -28,8 +28,6 @@ public class SecurityConfigurations{
             "/swagger-ui/index.html"
     };
 
-
-
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception{
         return httpSecurity
@@ -38,6 +36,7 @@ public class SecurityConfigurations{
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/auth/login/user").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register/user").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/auth/login/institution").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register/institution").permitAll()
                         .requestMatchers(HttpMethod.GET, AUTH_WHITE_LIST).permitAll()
                         .requestMatchers(HttpMethod.POST, "/transations").hasRole("ADMIN")

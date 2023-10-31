@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import com.sup.pix.domain.financial.institution.FinancialInstitution;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -35,6 +37,8 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
     private UserRole role;
+
+    private UUID financialInstitutionId;
 
     @Column(name = "document")
     @Embedded
