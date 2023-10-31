@@ -1,15 +1,18 @@
 package com.sup.pix.controllers;
 
-import com.sup.pix.domain.financial.instition.FinancialInstitution;
+import com.sup.pix.domain.financial.institution.FinancialInstitution;
 import com.sup.pix.domain.user.AuthenticationDTO;
 import com.sup.pix.domain.user.LoginResponseDTO;
 import com.sup.pix.domain.user.RegisterDTO;
 import com.sup.pix.domain.user.User;
-import com.sup.pix.domain.financial.instition.RegisterInstitutionDTO;
+import com.sup.pix.domain.financial.institution.dtos.RegisterInstitutionDTO;
+import com.sup.pix.domain.financial.institution.dtos.InstitutionLoginResponseDTO;
+import com.sup.pix.domain.financial.institution.dtos.InstitutionAuthenticationDTO;
 
 import com.sup.pix.infra.security.TokenService;
 import com.sup.pix.repositories.FinancialInstitutionRepository;
 import com.sup.pix.repositories.UserRepository;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("auth")
+@Tag(name = "Authentication", description = "Users and Financial institutions authentication")
 public class AuthenticationController {
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -38,7 +42,7 @@ public class AuthenticationController {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
 
-        var token = tokenService.generateToken((User) auth.getPrincipal());
+        var token = tokenService.generateUserToken((User) auth.getPrincipal());
 
         return ResponseEntity.ok(new LoginResponseDTO(token));
     }
@@ -60,6 +64,16 @@ public class AuthenticationController {
         this.userRepository.save(newUser);
 
         return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/login/institution")
+    public ResponseEntity login(@RequestBody @Valid InstitutionAuthenticationDTO data){
+        var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
+        var auth = this.authenticationManager.authenticate(usernamePassword);
+
+        var token = tokenService.generateInstitutionToken((FinancialInstitution) auth.getPrincipal());
+
+        return ResponseEntity.ok(new InstitutionLoginResponseDTO(token));
     }
 
     @PostMapping("/register/institution")

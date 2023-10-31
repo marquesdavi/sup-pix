@@ -12,10 +12,10 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
         info =@Info(
-                title = "User API",
-                version = "${api.version}",
+                title = "Sup Pix API",
+                version = "0.1",
                 contact = @Contact(
-                        name = "Sup", email = "user-apis@suppayments.com", url = "https://www.suppayments.com"
+                        name = "Sup", email = "supapis@suppayments.com", url = "https://www.suppayments.com"
                 ),
                 license = @License(
                         name = "MIT", url = "https://www.apache.org/licenses/LICENSE-2.0"

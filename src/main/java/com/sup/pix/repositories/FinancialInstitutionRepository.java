@@ -1,6 +1,6 @@
 package com.sup.pix.repositories;
 
-import com.sup.pix.domain.financial.instition.FinancialInstitution;
+import com.sup.pix.domain.financial.institution.FinancialInstitution;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 

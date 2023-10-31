@@ -1,20 +1,16 @@
 package com.sup.pix.controllers;
 
 import com.sup.pix.domain.user.User;
-import com.sup.pix.repositories.UserRepository;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.jetbrains.annotations.NotNull;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
-
-
-import at.favre.lib.crypto.bcrypt.BCrypt;
 
 @RestController
 @RequestMapping("/transations")
+@Tag(name = "Transations", description = "Transations Abstract")
 public class TransationController {
 //    @Autowired
 //    private UserRepository userRepository;
@@ -40,7 +36,7 @@ public class TransationController {
     }
 
     @PostMapping("/transfer")
-    public ResponseEntity createTranfer(){
+    public ResponseEntity createTransfer(){
         return ResponseEntity.status(HttpStatus.ACCEPTED).body("userCreated");
     }
 }

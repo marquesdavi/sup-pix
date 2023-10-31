@@ -1,25 +1,44 @@
 package com.sup.pix.domain.transation;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import lombok.Data;
+import lombok.Getter;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
-@Data
-@Entity
-public class Transation {
-    @Id
-    @GeneratedValue(generator = "UUID")
+@Getter
+public abstract class Transation {
     private UUID id;
-    @Column(name = "description")
     private String description;
-    @Column(name = "payment_status")
     private PaymentStatusEnum status;
-    @Column(name = "value")
     private double value;
-    @Column(name = "payment_type")
     private TransationType type;
+    private LocalDateTime creationTime;
+
+    public Transation(){
+
+    }
+
+    public void setId(UUID id) {
+        this.id = id;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setStatus(PaymentStatusEnum status) {
+        this.status = status;
+    }
+
+    public void setValue(double value) {
+        this.value = value;
+    }
+
+    public void setType(TransationType type) {
+        this.type = type;
+    }
+
+    public void setCreationTime(LocalDateTime creationTime) {
+        this.creationTime = creationTime;
+    }
 }
