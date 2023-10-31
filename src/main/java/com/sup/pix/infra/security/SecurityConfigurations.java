@@ -39,6 +39,7 @@ public class SecurityConfigurations{
                         .requestMatchers(HttpMethod.POST, "/auth/login/institution").permitAll()
                         .requestMatchers(HttpMethod.POST, "/auth/register/institution").permitAll()
                         .requestMatchers(HttpMethod.GET, AUTH_WHITE_LIST).permitAll()
+                        .requestMatchers(HttpMethod.GET, "/financial-institution/list").hasRole("USER")
                         .requestMatchers(HttpMethod.POST, "/transations").hasRole("ADMIN")
                         .anyRequest().authenticated()
                 )
