@@ -9,16 +9,14 @@ public record FinancialInstitutionResponseDTO(
         UUID id,
         String email,
         String corporateReason,
-        String document,
-        UserRole role
+        String document
 ) {
     public FinancialInstitutionResponseDTO(FinancialInstitution financialInstitution){
         this(
                 financialInstitution.getId(),
                 financialInstitution.getEmail(),
                 financialInstitution.getCorporateReason(),
-                financialInstitution.getDocument(),
-                financialInstitution.getRole()
+                financialInstitution.getDocument()
         );
     }
 }

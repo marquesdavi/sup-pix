@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sup.pix.domain.user.User;
 import com.sup.pix.domain.user.UserRole;
 import jakarta.persistence.*;
@@ -33,6 +34,7 @@ public class FinancialInstitution implements UserDetails {
     private String email;
     @Column(name = "corporate_reason")
     private String corporateReason;
+    @JsonIgnore
     @Column(name = "password")
     private String password;
     private UserRole role;
@@ -58,6 +60,7 @@ public class FinancialInstitution implements UserDetails {
         this.role = role;
     }
 
+    @JsonIgnore
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         if (this.role == UserRole.ADMIN) {
@@ -68,26 +71,31 @@ public class FinancialInstitution implements UserDetails {
         } else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
+    @JsonIgnore
     @Override
     public String getUsername() {
         return email;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isAccountNonLocked() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isCredentialsNonExpired() {
         return true;
     }
 
+    @JsonIgnore
     @Override
     public boolean isEnabled() {
         return true;
