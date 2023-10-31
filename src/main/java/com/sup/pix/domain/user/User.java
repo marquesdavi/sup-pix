@@ -48,13 +48,22 @@ public class User implements UserDetails {
     @CreationTimestamp
     private LocalDateTime createdAt;
 
-    public User(String email, String password, String firstName, String lastName, UserIdentification document, UserRole role){
+    public User(
+            String email,
+            String password,
+            String firstName,
+            String lastName,
+            UserIdentification document,
+            UserRole role,
+            UUID financialInstitutionId
+    ){
         this.email = email;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.document = document;
         this.role = role;
+        this.financialInstitutionId = financialInstitutionId;
     }
 
     @Override

@@ -58,7 +58,8 @@ public class AuthenticationController {
                 data.firstName(),
                 data.lastName(),
                 data.document(),
-                data.role()
+                data.role(),
+                data.financialInstitutionId()
         );
 
         this.userRepository.save(newUser);

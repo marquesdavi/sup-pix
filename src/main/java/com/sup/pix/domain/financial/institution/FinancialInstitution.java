@@ -5,6 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
 
+import com.sup.pix.domain.user.User;
 import com.sup.pix.domain.user.UserRole;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -34,7 +35,7 @@ public class FinancialInstitution implements UserDetails {
     private String corporateReason;
     @Column(name = "password")
     private String password;
-    private InstitutionRole role;
+    private UserRole role;
 
     @Column(name = "document")
     private String document;
@@ -48,7 +49,7 @@ public class FinancialInstitution implements UserDetails {
             String password,
             String corporateReason,
             String document,
-            InstitutionRole role
+            UserRole role
     ){
         this.email = email;
         this.corporateReason = corporateReason;
@@ -59,12 +60,12 @@ public class FinancialInstitution implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        if (this.role == InstitutionRole.ADMIN) {
+        if (this.role == UserRole.ADMIN) {
             return List.of(
                     new SimpleGrantedAuthority("ROLE_ADMIN"),
-                    new SimpleGrantedAuthority("ROLE_INSTITUTION")
+                    new SimpleGrantedAuthority("ROLE_USER")
             );
-        } else return List.of(new SimpleGrantedAuthority("ROLE_INSTITUTION"));
+        } else return List.of(new SimpleGrantedAuthority("ROLE_USER"));
     }
 
     @Override
