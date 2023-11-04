@@ -1,4 +1,4 @@
-package com.sup.pix.domain.pix;
+package com.sup.pix.domain.keys;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
@@ -9,5 +9,5 @@ public class Pix {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
-
+    private UUID user_id;
 }
