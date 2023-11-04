@@ -23,6 +23,13 @@ import org.springframework.context.annotation.Configuration;
                 termsOfService = "${tos.uri}",
                 description = "Simple instant payment API"
         )
+
+)
+@SecurityScheme(
+        name = "bearerAuth",
+        type = SecuritySchemeType.HTTP,
+        bearerFormat = "JWT",
+        scheme = "bearer"
 )
 public class OpenAPISecurityConfiguration {
 
