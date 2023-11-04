@@ -1,11 +1,15 @@
-package com.sup.pix.domain.keys;
+package com.sup.pix.domain.key;
 
+import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import lombok.Data;
 
 import java.util.UUID;
 
-public class Pix {
+@Entity
+@Data
+public class Key {
     @Id
     @GeneratedValue(generator = "UUID")
     private UUID id;
